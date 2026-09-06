@@ -358,8 +358,7 @@ Result: 10/10 passed.
 The dashboard was checked against independently calculated July and August ground truth.
 
 | Metric | July 2026 | August 2026 | Change |
-| --- | ---: | ---:
-| ---: |
+|---|---:|---:|---:|
 | Net sales | S$4,013.00 | S$3,577.50 | −10.85% |
 | Total orders | 598 | 546 | −8.70% |
 | Units sold | 656 | 596 | −9.15% |
