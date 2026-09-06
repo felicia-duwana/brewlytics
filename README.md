@@ -273,7 +273,8 @@ Generated directories such as `.next/`, `.vinext/`, `dist/`, `.wrangler/`, and `
 Before public production use, the prototype still requires authentication, rate limiting, restricted CORS, AWS WAF, monitoring, budget alerts, persistence controls, and broader automated testing.
 
 ## Testing and evaluation
-<img width="278" height="517" alt="Screenshot 2026-09-06 at 3 41 40 PM" src="https://github.com/user-attachments/assets/018dcc27-d87e-4d9b-830f-88eaa304d2d8" />
+<img width="350" height="502" alt="Screenshot 2026-09-06 at 9 33 42 PM" src="https://github.com/user-attachments/assets/02891267-c6c5-4e9d-a551-9ec2c330828e" />
+
 
 The current automated suite has **96 passing tests**: 94 Vitest tests across eight files and two Playwright browser tests.
 
