@@ -1,6 +1,6 @@
 # Brewlytics
 
-**Evidence-led performance intelligence for small, single-outlet cafés.**
+**Evidence-led performance intelligence for small, 1-3 outlet cafés.**
 
 Brewlytics turns POS sales and item-cost exports into a cleaned decision dashboard. Café owners can then ask an AI investigation agent why performance changed and receive an answer grounded in their uploaded data.
 
@@ -8,7 +8,7 @@ The application combines deterministic business calculations with Amazon Bedrock
 
 ## Problem
 
-Independent café owners already have valuable sales and cost data sitting in their POS exports. Yet, despite 77% of SMEs in the Food, Beverage & Tobacco industry expressing interest in sending staff for data analytics training, only 7.5% have adopted data analytics tools. This gap exists alongside a broader shortage of dedicated data-analysis capabilities among SMEs, with many businesses outsourcing as a way to keep up with their IT functions. (Koh et al., 2020)
+Independent café owners with 1-3 outlets already have valuable sales and cost data sitting in their POS exports. Yet, despite 77% of SMEs in the Food, Beverage & Tobacco industry expressing interest in sending staff for data analytics training, only 7.5% have adopted data analytics tools. This gap exists alongside a broader shortage of dedicated data-analysis capabilities among SMEs, with many businesses outsourcing as a way to keep up with their IT functions. (Koh et al., 2020)
 
 The problem, therefore, is not a lack of data rather it is the recurring gap between having the numbers and knowing what they mean. As cafés operate across increasingly fragmented information environments, business records remain scattered across systems and rarely translate into clear, timely decisions. Over time, these gaps in managerial understanding can compound quietly, only becoming visible when they surface as cash-flow pressure or reduced operational flexibility (Lee, 2026). But by then it would have been too late for the cafes to solve the issue. 
 
