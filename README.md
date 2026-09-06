@@ -279,9 +279,6 @@ The current automated suite has 96 passing tests: 94 Vitest tests across eight f
 
 Run the checks with:
 
-Bash
-
-
 npm test              # all 94 unit, integration, safety and Lambda-handler tests
 npm run test:unit     # 86 application unit and integration tests
 npm run test:lambda   # 8 direct tests of the real Lambda handler
@@ -291,9 +288,7 @@ npm run build
 
 Before running Playwright locally for the first time, install its Chromium browser:
 
-Bash
-
-
+
 npx playwright install chromium
 
 The automated tests cover:
