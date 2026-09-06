@@ -273,28 +273,180 @@ Generated directories such as `.next/`, `.vinext/`, `dist/`, `.wrangler/`, and `
 Before public production use, the prototype still requires authentication, rate limiting, restricted CORS, AWS WAF, monitoring, budget alerts, persistence controls, and broader automated testing.
 
 ## Testing and evaluation
-<img width="350" height="502" alt="Screenshot 2026-09-06 at 9 33 42 PM" src="https://github.com/user-attachments/assets/179787a4-b362-4190-aa7e-fbc6f3e46084" />
+<img width="382" height="576" alt="Screenshot 2026-09-06 at 9 47 51 PM" src="https://github.com/user-attachments/assets/9f976435-c303-41b0-ba94-ca9ec63bd9c7" />
 
-
-The current automated suite has **96 passing tests**: 94 Vitest tests across eight files and two Playwright browser tests.
-
+The current automated suite has 96 passing tests: 94 Vitest tests across eight files and two Playwright browser tests.
 
 Run the checks with:
 
-```bash
+Bash
+
+
 npm test              # all 94 unit, integration, safety and Lambda-handler tests
 npm run test:unit     # 86 application unit and integration tests
 npm run test:lambda   # 8 direct tests of the real Lambda handler
 npm run test:e2e      # 2 Chromium end-to-end browser tests
 npm run lint
 npm run build
-```
 
 Before running Playwright locally for the first time, install its Chromium browser:
 
-```bash
+Bash
+
+
 npx playwright install chromium
-```
+
+The automated tests cover:
+
+- File upload and workbook parsing
+- Automatic and manual data cleaning
+- Missing-value handling
+- Duplicate detection and removal
+- Product-name standardisation
+- KPI calculations
+- Distinct-order counting
+- Cost coverage
+- Deterministic investigation tools
+- Evidence-safety rules
+- Lambda request validation and response handling
+- Bedrock failure and malformed-response handling
+- End-to-end browser behaviour
+
+The Lambda tests execute backend/investigation-agent/index.mjs directly and cover CORS preflight, request validation, oversized aggregates, successful response structure, Bedrock failures, and empty or malformed model responses.
+
+The Playwright suite uses public, deterministic CSV fixtures to exercise the single-outlet workflow from upload through cleaning, dashboard KPIs and an AI investigation. It also verifies that an invalid upload is rejected.
+
+Both the browser investigation endpoint and Lambda Bedrock client are mocked during automated testing, so the automated suite requires no AWS credentials and incurs no Bedrock charges.
+
+GitHub Actions runs the automated checks on pushes and pull requests to main.
+
+### Controlled manual testing
+
+In addition to automated tests, Brewlytics was evaluated using a controlled manual test protocol with specially constructed POS sales and unit-cost workbooks.
+
+The manual evaluation was designed to test behaviour that cannot be fully assessed through conventional unit tests, particularly:
+
+- Owner interaction with data-quality problems
+- Ambiguous cross-file product matching
+- Incomplete cost coverage
+- Dashboard accuracy against independently calculated ground truth
+- AI numerical accuracy
+- AI evidence grounding
+- AI handling of missing information
+- Unsupported causal questions
+- Unsupported financial calculations
+- Evidence-backed recommendations
+
+The test dataset contained controlled data-quality conditions including:
+
+- One exact duplicate POS row
+- One missing product name
+- One missing sales channel
+- Iced Latte case and whitespace variations
+- Matcha Latte case variations
+- An ambiguous cross-file croissant product name requiring owner confirmation
+- Blueberry Muffin sales with no corresponding unit cost
+- A cost-only Seasonal Tart with no sales
+- Product costs that change between July and August
+
+Ambiguous mappings were not silently inferred. For example, the POS item Chicken & Cheese Croissant required owner confirmation before being linked to the cost-file item Chicken Croissant.
+
+Missing product cost was also treated as unknown rather than zero, allowing Brewlytics to report cost coverage and covered gross profit without presenting an unsupported whole-café gross-profit figure.
+
+### Manual dashboard validation
+
+Ten upload, cleaning and dashboard test cases were executed.
+
+Result: 10/10 passed.
+
+The dashboard was checked against independently calculated July and August ground truth.
+
+| Metric | July 2026 | August 2026 | Change |
+| --- | ---: | ---:
+| ---: |
+| Net sales | S$4,013.00 | S$3,577.50 | −10.85% |
+| Total orders | 598 | 546 | −8.70% |
+| Units sold | 656 | 596 | −9.15% |
+| Average order value | S$6.71 | S$6.55 | ≈ −2.4% |
+| Sales with valid cost coverage | S$3,565.00 | S$3,125.50 | — |
+| Item cost on covered sales | S$1,569.30 | S$1,558.30 | — |
+| Covered gross profit | S$1,995.70 | S$1,567.20 | −21.47% |
+| Cost coverage | 88.84% | 87.37% | −1.47 pp |
+| Discounts | S$15.50 | S$51.50 | +S$36.00 |
+| Refunds | S$0.00 | S$6.00 | +S$6.00 |
+
+Because Blueberry Muffin has no unit cost, the evaluation deliberately does not treat S$1,567.20 as an exact whole-café gross-profit figure. It represents gross profit only for sales with known product costs.
+
+### Manual AI evaluation
+
+The live investigation agent was evaluated using 10 predefined business questions after the controlled dataset had been cleaned and accepted.
+
+Each response was scored out of eight points:
+
+| Criterion | Maximum |
+| --- | ---: |
+| Numerical accuracy | 2 |
+| Evidence grounding | 2 |
+| Correct conclusion | 2 |
+| Limitation handling | 1 |
+| Clarity and usefulness | 1 |
+| Total | 8 |
+
+A response required at least 6/8, the correct main conclusion, and no fabricated evidence or unsupported causal claim to pass.
+
+| Test | Investigation | Score | Result |
+| --- | --- | ---: | --- |
+| AI-01 | Overall performance change | 8/8 | Pass |
+| AI-02 | Largest gross-profit decline contributor | 7/8 | Pass |
+| AI-03 | High-margin, lower-volume opportunity | 8/8 | Pass |
+| AI-04 | Popular low-margin product | 6/8 | Pass |
+| AI-05 | Discount and refund evidence | 8/8 | Pass |
+| AI-06 | Channel performance | 8/8 | Pass |
+| AI-07 | Missing-cost limitation | 8/8 | Pass |
+| AI-08 | Unsupported weather causation | 8/8 | Pass |
+| AI-09 | Unsupported net operating profit | 8/8 | Pass |
+| AI-10 | Evidence-backed recommendation | 7/8 | Pass |
+
+Manual AI result: 10/10 test cases passed, with a total score of 76/80 (95%).
+
+The evaluation included both answerable and deliberately unsupported questions. For example, the agent was expected to refuse to attribute the August sales decline to bad weather because weather data was not uploaded. It was also expected to state that net operating profit could not be calculated without rent, salaries, utilities and other operating-expense data.
+
+### Key AI evaluation findings
+
+The investigation agent successfully:
+
+- Identified the August decline in sales and orders
+- Identified Iced Latte as the largest contributor to the decline in covered gross profit, at approximately S$377.20
+- Identified Matcha Latte as a relatively high-margin, lower-volume opportunity
+- Identified Chicken & Cheese Croissant as a popular but comparatively low-margin product
+- Correctly quantified the increase in discounts and refunds
+- Identified Dine-in as the highest-sales August channel
+- Refused to provide an unsupported exact whole-café gross-profit figure when product costs were incomplete
+- Refused to infer weather causation without weather evidence
+- Refused to substitute gross profit for net operating profit
+- Produced evidence-backed recommendations without guaranteeing business outcomes
+
+### Limitation discovered during testing
+
+Manual evaluation also exposed an important remaining edge case.
+
+In some product-level responses, a product with missing cost data, such as Blueberry Muffin, can be represented as having S$0 profit or a 0% margin. The correct interpretation is that its profit and margin are unknown because its cost is unavailable.
+
+Aggregate financial reporting already qualifies incomplete cost coverage, but this product-level representation remains an identified limitation for future improvement.
+
+### Overall test result
+
+| Evaluation | Result |
+| --- | ---: |
+| Vitest automated tests | 94 passed |
+| Playwright end-to-end tests | 2 passed |
+| Total automated tests | 96 passed |
+| Manual upload/cleaning/dashboard tests | 10/10 passed |
+| Manual AI test cases | 10/10 passed |
+| Manual AI evaluation score | 76/80 (95%) |
+
+
+
 
 The application tests cover upload parsing, automatic and manual cleaning, duplicate handling, KPI calculations, distinct-order counting, cost coverage, deterministic investigation tools and evidence-safety rules. The Lambda tests execute `backend/investigation-agent/index.mjs` directly and cover CORS preflight, request validation, oversized aggregates, successful response structure, Bedrock failures, and empty or malformed model responses.
 
@@ -304,7 +456,7 @@ GitHub Actions runs these checks on pushes and pull requests to `main`. Live Bed
 
 ## Limitations
 
-* The prototype analyses a single café outlet.
+
 * Full net profit cannot be calculated using POS sales and item-cost data alone.
 * Gross-profit accuracy depends on the completeness and correctness of item-cost data.
 * Forecast quality depends on the amount and representativeness of the uploaded historical data.
