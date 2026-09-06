@@ -906,13 +906,17 @@ for (const r of costRows) {
   );
 
   if (effectiveDate) {
-    const month = monthKey(effectiveDate);
+  const month = monthKey(effectiveDate);
+  const cost = num(value);
 
-    unitCostByMonthProduct.set(
-      `${month}|||${product}`,
-      num(value),
-    );
-  } else {
+  unitCostByMonthProduct.set(
+    `${month}|||${product}`,
+    cost,
+  );
+
+  // Use this cost as the fallback for later sales months.
+  unitCostByProduct.set(product, cost);
+} else {
     /*
      * No effective date means this is a normal
      * static product-cost file.
