@@ -1,6 +1,7 @@
 # Brewlytics
 
 **Evidence-led performance intelligence for small, 1-3 outlet cafés.**
+For cafe owners with no analyst on staff,  our decision-support AI  automatically turns scattered sales records into a clear answer on business drivers across operations.
 
 Brewlytics turns POS sales and item-cost exports into a cleaned decision dashboard. Café owners can then ask an AI investigation agent why performance changed and receive an answer grounded in their uploaded data.
 
