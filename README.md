@@ -105,8 +105,8 @@ The project uses TypeScript and Node.js. Its dependencies are declared in `packa
 Clone the repository and install its dependencies:
 
 ```bash
-git clone https://github.com/zxtan689/fake-hackathon-.git
-cd fake-hackathon-
+git clone https://github.com/felicia-duwana/brewlytics
+cd brewlytics
 npm install
 ```
 
