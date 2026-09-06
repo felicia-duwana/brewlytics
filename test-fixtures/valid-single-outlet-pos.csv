@@ -1,0 +1,13 @@
+date,order_id,outlet,product,quantity,unit_price,unit_cost,channel
+2026-07-01,J001,Main Cafe,Iced Latte,1,5,2,In-store
+2026-07-02,J002,Main Cafe,Iced Latte,1,5,2,In-store
+2026-07-03,J003,Main Cafe,Iced Latte,1,5,2,Delivery
+2026-07-04,J004,Main Cafe,Iced Latte,1,5,2,In-store
+2026-07-05,J005,Main Cafe,Iced Latte,1,5,2,Delivery
+2026-07-06,J006,Main Cafe,Iced Latte,1,5,2,In-store
+2026-08-01,A001,Main Cafe,Iced Latte,1,5,2,In-store
+2026-08-02,A002,Main Cafe,Iced Latte,1,5,2,In-store
+2026-08-03,A003,Main Cafe,Iced Latte,1,5,2,Delivery
+2026-08-04,A004,Main Cafe,Iced Latte,1,5,2,In-store
+2026-08-05,A005,Main Cafe,Iced Latte,1,5,2,Delivery
+2026-08-06,A006,Main Cafe,Iced Latte,1,5,2,In-store
