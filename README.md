@@ -7,6 +7,10 @@ Brewlytics turns POS sales and item-cost exports into a cleaned decision dashboa
 
 The application combines deterministic business calculations with Amazon Bedrock. It separates measured evidence from assumptions and states when the available data cannot support a conclusion.
 
+## Live deployment
+
+Try Brewlytics here: [https://brewlytics.sn-girlies.workers.dev](https://brewlytics.sn-girlies.workers.dev)
+
 ## Problem
 
 Independent café owners with 1-3 outlets already have valuable sales and cost data sitting in their POS exports. Yet, despite 77% of SMEs in the Food, Beverage & Tobacco industry expressing interest in sending staff for data analytics training, only 7.5% have adopted data analytics tools. This gap exists alongside a broader shortage of dedicated data-analysis capabilities among SMEs, with many businesses outsourcing as a way to keep up with their IT functions. (Koh et al., 2020)
@@ -492,4 +496,3 @@ No licence has been specified. Unless the repository owner adds one, all rights 
 Lee, Namsuk. (2026). Financial Literacy and Small Business Sustainability in Owner-Operated Café and Restaurant Businesses A Preventive Operational Awareness Framework. 
 
 Koh, S. K., Perdana, A., Arisandi, D., & Lee, H. H., Tan, A., ISCA (2020). DATA ANALYTICS ADOPTION IN SINGAPORE SMEs. SIT 
-
